@@ -1,0 +1,9 @@
+[Unit]
+Description=Restart USB power hub
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/uhubctl -a 2 -l 2
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=Mount HD dir
+DefaultDependencies=no
+Conflicts=umount.target
+Requires=reset-usb.service
+Before=local-fs.target umount.target
+After=swap.target
+
+[Mount]
+What=/dev/sda1
+Where=/hd
+Type=ext4
+Options=defaults
+
+[Install]
+WantedBy=multi-user.target
