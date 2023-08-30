@@ -8,7 +8,7 @@ After=swap.target
 
 [Mount]
 What=/dev/sda1
-Where=/hd
+Where=/data
 Type=ext4
 Options=defaults
 
