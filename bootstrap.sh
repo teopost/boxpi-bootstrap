@@ -20,7 +20,7 @@ echo \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt-get update
+sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 
@@ -28,7 +28,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 # ---------------------
 # https://wiki.geekworm.com/XScript
 cd ~
-sudo echo "dtoverlay=pwm-2chan" >> "/boot/config.txt"
+sudo su -c 'echo "dtoverlay=pwm-2chan" >> "/boot/config.txt"'
 git clone https://github.com/geekworm-com/xscript
 cd xscript
 chmod +x *.sh
@@ -50,7 +50,9 @@ sudo systemctl start x-c1-pwr
 # Prepair software shutdown script
 sudo cp -f ./x-c1-softsd.sh             /usr/local/bin/
 
-# create alis for software shutdown
-sudo echo "alias xoff='sudo /usr/local/bin/x-c1-softsd.sh'" > /etc/profile.d/custom-aliases.sh
+# create alis for software shutdown (warning.. sudo don't work)
+echo "alias xoff='sudo /usr/local/bin/x-c1-softsd.sh'" > /etc/profile.d/custom-aliases.sh
+echo "alias ll='ls -lisatr'" >> /etc/profile.d/custom-aliases.sh
 sudo chmod 777 /etc/profile.d/custom-aliases.sh
+
 
