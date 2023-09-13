@@ -1,3 +1,6 @@
+# deve essere 64 bit
+getconf LONG_BIT
+
 sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt install -y git
@@ -6,23 +9,8 @@ sudo apt install -y git
 # https://docs.docker.com/engine/install/raspberry-pi-os/
 # --------------
 cd ~
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
-
-sudo apt-get update -y
-sudo apt-get install ca-certificates curl gnupg mc
-
-sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/raspbian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-sudo chmod a+r /etc/apt/keyrings/docker.gpg
-
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/raspbian \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt-get update -y
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
 
 # install naspi scripts
 # ---------------------
